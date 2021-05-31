@@ -5,3 +5,4 @@ jsonpickle
 pymongo
 flask
 dnspython
+gunicorn
