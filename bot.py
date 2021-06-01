@@ -95,7 +95,7 @@ class racer():
 
     #ws.close()
     def on_message(self,ws, message):
-        #print(message)
+        print(message)
         try:
             if json.loads(message.split('4')[1])['payload']['type'] == 'captcha':
                 self.sesh.post('https://captcha-bypass-bot.adl212.repl.co', data={'username': self.username, 'password': self.password})
