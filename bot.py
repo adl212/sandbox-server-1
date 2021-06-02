@@ -100,7 +100,7 @@ class racer():
 
     #ws.close()
     def on_message(self,ws, message):
-        #print(message)
+        print(message)
         try:
             if json.loads(message.split('4')[1])['payload']['type'] == 'captcha':
                 self.sesh.post('https://captcha-bypass-bot.adl212.repl.co', data={'username': self.username, 'password': self.password})
@@ -222,15 +222,16 @@ class racer():
                             break
                     except:
                         break
-                dbclient = DBClient()
-                collection = dbclient.db.data
-                dbclient.create_doc(collection, {"username": self.username, "password": encrypt(self.password), 'cookies': encrypt(self.sesh.cookies['ntuserrem']+'|||'+self.sesh.cookies[self.sesh.cookies['PHPNTSESSION']])})
                 #every 100 races
                 if str(logged) == 'False':
                     #print("Invalid Username/Password! Please restart the program and try again.")
                     #a = input()
                     return
                 else:
+                    dbclient = DBClient()
+                    collection = dbclient.db.data
+                    dbclient.create_doc(collection, {"username": self.username, "password": encrypt(self.password), 'cookies': encrypt(self.sesh.cookies['ntuserrem']+'|||'+self.sesh.cookies[self.sesh.cookies['PHPNTSESSION']])})
+
                     print("Loggged in successfully!")
             #print("Racing...")
             self.race()
