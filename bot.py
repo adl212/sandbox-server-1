@@ -28,7 +28,10 @@ def encrypt(message):
     return (encrypted_message.decode())
 class racer():
     def __init__(self, usr, pwd, spd, acc, rcs, nitro):
-        self.sesh = cloudscraper.create_scraper() #HTTP session to be used
+        with open('scrapers.json') as f:
+            data = json.load(f)
+        scraper = jsonpickle.decode(random.choice(data['scrapers']))
+        self.sesh = scraper.create_scraper() #HTTP session to be used
 
         self.username = usr
         self.password = pwd
