@@ -182,7 +182,7 @@ class racer():
             typingTheText = threading.Thread(target = type, args  = [words]) #starting a thread to race
             typingTheText.start()
     def on_error(self, ws, error):
-        print(error)
+        print("error": error)
 
     def on_close(self, ws):
         self.closed = True
