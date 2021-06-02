@@ -79,9 +79,14 @@ class racer():
         prefix = f'realtime{str(self.server)}.nitrotype.com/realtime/'
         sid_get_request = self.sesh.get(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" +  self.get_time() + "&b64=1").text
         sid = json.loads(sid_get_request.split("96:0")[1])['sid'] #SID is used in other requests
-    
-        raceCheck = self.sesh.post(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" + self.get_time() + "&b64=1&sid=" + sid, data = sid_get_request)
-
+        with open('data.json') as f:
+            data = json.load(f)
+        friends = self.log['data']['friends']
+        data['friends'] = friends
+        length = len(str(data))
+        data = str(length)+':4'+str(data).lower()
+        raceCheck = self.sesh.post(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" + self.get_time() + "&b64=1&sid=" + sid, data = data)
+        self.sesh.get(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" + self.get_time() + "&b64=1&sid=" + sid)
         cookieString = self.getCookies(self.sesh.cookies)
         raceUrl = f"wss://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=websocket&sid=" + sid + "&t=" + self.get_time() + "&b64=1"
         return[cookieString, raceUrl] #Need cookies & url to connect to websocket.
