@@ -31,7 +31,7 @@ class racer():
         with open('scrapers.json') as f:
             data = json.load(f)
         scraper = jsonpickle.decode(random.choice(data['scrapers']))
-        self.sesh = scraper.create_scraper() #HTTP session to be used
+        self.sesh = scraper#HTTP session to be used
 
         self.username = usr
         self.password = pwd
@@ -97,9 +97,12 @@ class racer():
     def on_open(self, ws): #Requests to send once the WS is open - verifies that websocket is good
         self.closed = False
         ws.send('2probe')
+        time.sleep(0.5)
         ws.send("5")
-        payload = {"stream":"race","msg":"join","payload":{"avgSpeed":self.cookie_speed,"update":"03417", 'cacheId': "7dad11db285be6cfcef037df7f970acb31a820b61357", 'cacheIdInteger': 1357}}
+        #4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61357","cacheIdInteger":1357}}
+        payload = '4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61357","cacheIdInteger":1357}}'
         payload = '4'+str(payload)
+        print(payload)
         ws.send(payload)
 
     #ws.close()
