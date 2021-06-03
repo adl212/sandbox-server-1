@@ -98,7 +98,8 @@ class racer():
         self.closed = False
         ws.send('2probe')
         ws.send("5")
-        payload = '4{"stream":"race","msg":"join","payload":{"avgSpeed":' + self.cookie_speed + ',"update":3417}}'
+        payload = {"stream":"race","msg":"join","payload":{"avgSpeed":self.cookie_speed,"update":"03417", 'cache_id': "7dad11db285be6cfcef037df7f970acb31a820b61356", 'cache_id_integer': 1356}}
+        payload = '4'+str(payload)
         ws.send(payload)
 
     #ws.close()
