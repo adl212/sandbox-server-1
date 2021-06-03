@@ -101,7 +101,6 @@ class racer():
         ws.send("5")
         #4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61357","cacheIdInteger":1357}}
         payload = '4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61357","cacheIdInteger":1357}}'
-        payload = '4'+str(payload)
         print(payload)
         ws.send(payload)
 
