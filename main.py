@@ -41,13 +41,9 @@ def main():
             try:
                 form['threads']
                 for x in range(1, int(form['threads'])+1):
-                    thread = threading.Thread(target=thebot(x).startBot)
-                    thread.start()
-                    thread.join(0.5)
+                    thebot(x).realStart()
             except:
-                thread = threading.Thread(target=thebot().startBot)
-                thread.start()
-                thread.join(1)
+                thebot().realStart()
             return "Added bot to queue"
         else:
             return 'Wrong password'
