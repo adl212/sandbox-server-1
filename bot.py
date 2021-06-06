@@ -100,7 +100,7 @@ class racer():
         time.sleep(0.5)
         ws.send("5")
         #4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61357","cacheIdInteger":1357}}
-        payload = '4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61357","cacheIdInteger":1357}}'
+        payload = '4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61361","cacheIdInteger":1361}}'
         print(payload)
         ws.send(payload)
 
