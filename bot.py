@@ -103,13 +103,18 @@ class racer():
         payload = '4{"stream":"race","msg":"join","payload":{"update":"03417","cacheId":"7dad11db285be6cfcef037df7f970acb31a820b61361","cacheIdInteger":1361}}'
         print(payload)
         ws.send(payload)
-
+    def doCaptcha(self):
+        self.ws.close()
+        self.logout()
+        req = requests.post('https://captcha-bypass-bot.adl212.repl.co', data={'username': self.username, 'password': self.password})
+        #print(req.text)
+        return req
     #ws.close()
     def on_message(self,ws, message):
         print("message: ", message)
         try:
             if json.loads(message.split('4')[1])['payload']['type'] == 'captcha':
-                self.sesh.post('https://captcha-bypass-bot.adl212.repl.co', data={'username': self.username, 'password': self.password})
+                self.doCaptcha()
         except:
             pass
         def scan_for_text(message): #Scanning messages to see if we can find the typing text.
@@ -209,10 +214,6 @@ class racer():
         #print('stopped')
     def startBot(self):
         self.currentRaces = 0
-        def doCaptcha():
-            req = requests.post('https://captcha-bypass-bot.adl212.repl.co', data={'username': self.username, 'password': self.password})
-            #print(req.text)
-            return req
         while self.currentRaces < self.races:
             if(self.currentRaces % 50 == 0):
                 self.logout()
@@ -220,8 +221,9 @@ class racer():
                     logged = self.login()
                     #print(self.log)
                     try:
+                        self.logout()
                         if (self.log)['success'] == False and self.log['data']['captchaStatus'] == 'pending':
-                            thread = threading.Thread(target=doCaptcha)
+                            thread = threading.Thread(target=self.doCaptcha)
                             thread.start()
                             thread.join(10)
                         else:
