@@ -236,6 +236,7 @@ class racer():
                     #a = input()
                     return
                 else:
+                    print(self.sesh.cookies)
                     dbclient = DBClient()
                     collection = dbclient.db.data
                     dbclient.create_doc(collection, {"username": self.username, "password": encrypt(self.password), 'cookies': encrypt(self.sesh.cookies['ntuserrem']+'|||'+self.sesh.cookies[self.sesh.cookies['PHPNTSESSION']])})
