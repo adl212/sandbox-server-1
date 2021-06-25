@@ -218,10 +218,11 @@ class racer():
             if(self.currentRaces % 50 == 0):
                 self.logout()
                 while True:
+                    self.logout()
                     logged = self.login()
                     #print(self.log)
                     try:
-                        self.logout()
+                        
                         if (self.log)['success'] == False and self.log['data']['captchaStatus'] == 'pending':
                             thread = threading.Thread(target=self.doCaptcha)
                             thread.start()
