@@ -89,6 +89,7 @@ class racer():
         length = len(str(data))
         data = str(length)+':4'+str(data).lower()
         raceCheck = self.sesh.post(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" + self.get_time() + "&b64=1&sid=" + sid, data = data)
+        print(raceCheck.text)
         #self.sesh.get(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" + self.get_time() + "&b64=1&sid=" + sid)
         cookieString = self.getCookies(self.sesh.cookies)
         raceUrl = f"wss://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=websocket&sid=" + sid + "&t=" + self.get_time() + "&b64=1"
