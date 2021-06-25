@@ -86,7 +86,7 @@ class racer():
             data = json.load(f)
         friends = self.log['data']['friends']
         data['friends'] = friends
-        length = len(str(data))+1
+        length = len(str(data))
         data = str(length)+':4'+str(data).lower()
         raceCheck = self.sesh.post(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" + self.get_time() + "&b64=1&sid=" + sid, data = data)
         #self.sesh.get(f"https://{prefix}?_primuscb=" + self.get_time() + "&EIO=3&transport=polling&t=" + self.get_time() + "&b64=1&sid=" + sid)
