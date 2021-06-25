@@ -71,7 +71,7 @@ class racer():
         '''
         headers['referer'] = 'https://www.nitrotype.com/login'
         headers['origin'] = 'https://www.nitrotype.com'
-        log = self.sesh.post("https://www.nitrotype.com/api/login", data = {"username": self.username, "password":self.password}, headers=headers)
+        log = self.sesh.post("https://www.nitrotype.com/api/login", data = {"username": self.username, "password":self.password})
         #(log.text)
         self.log = log.json()
         return self.log['success']
